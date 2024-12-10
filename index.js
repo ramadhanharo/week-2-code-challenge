@@ -1,44 +1,66 @@
-// Select DOM elements
-const itemInput = document.getElementById("item-input");
-const shoppingList = document.getElementById("shopping-list");
+// empty shopping list
+let shoppingList = [];
 
-// Function to add an item to the list
-function Itemtoadd() {
-    const itemValue = itemInput.value.trim();
+const form = document.querySelector('inputbox');
+const container = document.querySelector('.container');
 
-if (itemValue === "") {
-    alert("Please enter an item and its price.");
-    return;
+// get values from inputs and add to the array
+
+function displayItems() {
+	container.innerHTML = '';
+
+	shoppingList.forEach((item, index) => {
+		const itemCard = `<div class="item">
+				<div id="details-${index}" class="">
+					<h4 class="title">${item.name}</h4>
+					<p class="price">Ksh ${item.price}</p>
+				</div>
+				<div class="check">
+					<input type="checkbox" id="mark-${index}" onclick="togglePurchased(${index})" />
+					<label for="mark-${index}">Mark as purchased</label>
+				</div>
+			</div>`;
+
+		return container.insertAdjacentHTML('beforeend', itemCard);
+	});
+
+	clearList();
 }
 
-// Create a new list item
-const listed= document.createElement("li");
-listItem.textContent = itemValue;
+function togglePurchased(index) {
+	const checkbox = document.getElementById(`mark-${index}`);
+	const details = document.getElementById(`details-${index}`);
 
-// Add a clear button to the list item
-const clearButton = document.createElement("button");
-clearButton.textContent = "Remove";
-clearButton.style.marginLeft = "10px";
-clearButton.onclick = () => listItem.remove();
-
-listed.appendChild(clearButton);
-shoppingList.appendChild(listItem);
-
-// Clear the input field
-itemInput.value = "";
+	if (checkbox.checked) {
+		details.classList.add('purchased');
+	} else {
+		details.classList.remove('purchased');
+	}
 }
 
-// Function to clear the list
 function clearList() {
-    shoppingList.innerHTML = "";
+	const btns = document.querySelector('.btn-sections');
+	const clear = document.querySelector('.clear-list');
+
+	if (shoppingList.length > 0) {
+		btns.classList.remove('hidden');
+	}
+	clear.addEventListener('click', () => {
+		shoppingList = [];
+		container.innerHTML = ''; // Clear the UI
+		btns.classList.add('hidden');
+	});
 }
 
+form.addEventListener('submit', (e) => {
+	e.preventDefault();
+	const itemName = e.target.product.value;
+	const itemPrice = e.target.price.value;
 
-
-// Event listeners
-itemInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-        Itemtoadd();
-    }
+	shoppingList.push({
+		name: itemName,
+		price: itemPrice,
+	});
+	form.reset();
+	displayItems();
 });
-
