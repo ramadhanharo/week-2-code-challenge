@@ -1,0 +1,60 @@
+.shoppingList{
+    background-color: #ccc;
+    /* height: 40vh; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 50px;
+}
+h1{ 
+    font-size: 45px;
+    text-transform: uppercase;
+    font-family: monospace;
+
+}
+.inputbox{
+    display: flex;
+    gap: 20px;
+}
+.inputbox input{
+    height: 40px;
+    width: 50%;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 0 15px;
+    font-size: 16px;
+    font-weight: 700;
+    outline: none;
+    background: transparent;
+    color: #000;
+}
+
+button{
+    height: 40px;
+    width: 150px;
+    border: none;
+    background-color: green;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.3s ease-in;
+
+}
+
+#markPurchasedButton{
+    background-color: orange;
+}
+#clearListButton{
+    background-color: crimson;
+}
+button:hover{
+    transform: scale(0.95);
+}
+.purchased{
+    text-decoration: line-through;
+    color: crimson;
+}
